@@ -1,3 +1,51 @@
+var issuesWithUpdatedApiUrl = issues.map(issue => {
+  return Object.assign({}, issue.url, {
+    url: issue.url.replace("api.github.com", "api-v2.github.com")
+  })
+})
+
+var comment_counts = issues.map(issue => {return issue.comments_count})
+var commentCountAcrossIssues = comment_counts.reduce((total, comments) => total+comments)
+
+var openIssues = issues.map(issue => {
+  var issues_open = []
+  if(issue.state === 'open'){
+    issues_open.push(issue.state)
+  }
+  return issues_open
+})
+
+var nonAutomaticIssues =
+  issues.reduce( (issueAll,issue) =>
+    {
+       if (!issue.body.includes('automatically created by learn.co')) {
+           issueAll.push(issue);
+       }
+       return issueAll;
+     }, []);
+
+
+      const $tbody = document.getElementById('results');
+     $tbody.innerHTML = nonAutomaticIssues
+       .map(issue => `<tr>
+         <td>${issue.body}</td>
+         <td>${issue.created_at}</td>
+         <td>${issue.state}</td>
+         </tr>`
+       )
+       .join('');
+
+
+
+
+
+
+
+
+
+
+
+
 const issues = [
   {
     "body": "Instructions say GET /team and POST /newteam. Rspec wants GET/newteam and POST/team.",
