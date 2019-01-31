@@ -1,3 +1,26 @@
+var issuesWithUpdatedApiUrl = issues.map(function(issue) {
+  return Object.assign({}, issue.url, {
+    issue.url.replace("api.github.com", "api-v2.github.com")
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const issues = [
   {
     "body": "Instructions say GET /team and POST /newteam. Rspec wants GET/newteam and POST/team.",
